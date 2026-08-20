@@ -154,33 +154,1037 @@
     </header>
 
 
-    <!-- Temporary Main Content -->
-    <main>
+    <!-- Main Content -->
+    <!-- =====================================================
+     HOME HERO
+     ===================================================== -->
 
-        <section class="section">
-            <div class="container">
+<main>
 
-                <div class="section-header">
+    <section class="hero" id="home">
 
-                    <span class="section-label">
-                        Ember & Spoon
-                    </span>
+        <div class="container hero-container">
 
-                    <h1 class="section-title">
-                        Crafted with fire. Served with passion.
-                    </h1>
+            <!-- Hero Content -->
 
-                    <p class="section-description">
-                        Our premium restaurant experience will be built
-                        here step by step.
-                    </p>
+            <div class="hero-content">
+
+                <p class="hero-eyebrow">
+                    <span class="hero-eyebrow-line"></span>
+                    Crafted for the curious
+                </p>
+
+
+                <h1 class="hero-title">
+                    Where Every
+                    <span>Bite Tells a Story</span>
+                </h1>
+
+
+                <p class="hero-description">
+                    Bold flavors, carefully crafted dishes, and
+                    an atmosphere designed to turn every meal
+                    into an experience.
+                </p>
+
+
+                <div class="hero-actions">
+
+                    <a
+                        href="menu.html"
+                        class="btn btn-primary"
+                    >
+                        Explore Menu
+
+                        <span aria-hidden="true">
+                            →
+                        </span>
+                    </a>
+
+
+                    <a
+                        href="reservations.html"
+                        class="btn btn-outline hero-secondary-button"
+                    >
+                        Reserve a Table
+                    </a>
+
+                </div>
+
+
+                <!-- Small Trust Indicators -->
+
+                <div class="hero-details">
+
+                    <div class="hero-detail">
+
+                        <strong>
+                            4.9
+                        </strong>
+
+                        <span>
+                            Guest Rating
+                        </span>
+
+                    </div>
+
+
+                    <div class="hero-detail-divider"></div>
+
+
+                    <div class="hero-detail">
+
+                        <strong>
+                            10+
+                        </strong>
+
+                        <span>
+                            Years of Craft
+                        </span>
+
+                    </div>
+
+
+                    <div class="hero-detail-divider"></div>
+
+
+                    <div class="hero-detail">
+
+                        <strong>
+                            50+
+                        </strong>
+
+                        <span>
+                            Signature Dishes
+                        </span>
+
+                    </div>
 
                 </div>
 
             </div>
-        </section>
 
-    </main>
+
+            <!-- Hero Image -->
+
+            <div class="hero-visual">
+
+    <div class="hero-image-wrapper">
+
+        <img
+            src="images\hero-food.webp.webp"
+            alt="Beautifully plated signature dish at Ember & Spoon"
+            class="hero-image"
+        >
+
+    </div>
+
+    <div class="hero-image-caption">
+
+        <span>
+            Signature Dish
+        </span>
+
+        <strong>
+            Fire-roasted seasonal creation
+        </strong>
+
+    </div>
+
+</div>
+
+        <!-- Decorative Background Detail -->
+
+        <div
+            class="hero-decoration"
+            aria-hidden="true"
+        ></div>
+
+    </section>
+    <!-- =====================================================
+     FEATURED DISHES
+     ===================================================== -->
+
+<section class="featured-dishes section">
+
+    <div class="container">
+
+        <!-- Section Header -->
+
+        <div class="section-header featured-header">
+
+            <div>
+                <span class="section-label">
+                    From Our Kitchen
+                </span>
+
+                <h2 class="section-title">
+                    Signature dishes,
+                    <span class="featured-title-accent">
+                        made to remember.
+                    </span>
+                </h2>
+            </div>
+
+            <a
+                href="menu.html"
+                class="featured-menu-link"
+            >
+                View Full Menu
+                <span aria-hidden="true">→</span>
+            </a>
+
+        </div>
+
+
+        <!-- Dish Cards -->
+
+        <div class="featured-grid">
+
+
+            <!-- Dish 01 -->
+
+            <article
+                class="dish-card"
+                data-dish-id="dish-01"
+            >
+
+                <div class="dish-image-wrapper">
+
+                    <img
+                        src="./images/dish-01.webp"
+                        alt="Fire-roasted signature grilled dish"
+                        class="dish-image"
+                        loading="lazy"
+                    >
+
+                    <span class="dish-category">
+                        Main Course
+                    </span>
+
+
+                    <button
+                        class="dish-favorite"
+                        type="button"
+                        aria-label="Add Fire-Roasted Signature to favorites"
+                        aria-pressed="false"
+                    >
+                        ♡
+                    </button>
+
+                </div>
+
+
+                <div class="dish-content">
+
+                    <div class="dish-heading-row">
+
+                        <h3 class="dish-name">
+                            Fire-Roasted Signature
+                        </h3>
+
+                        <span class="dish-price">
+                            $28
+                        </span>
+
+                    </div>
+
+
+                    <p class="dish-description">
+                        Flame-seared premium cuts finished
+                        with our signature ember glaze and
+                        seasonal herbs.
+                    </p>
+
+
+                    <div class="dish-meta">
+
+                        <span class="dish-rating">
+                            ★ 4.9
+                        </span>
+
+                        <span class="dish-meta-divider"></span>
+
+                        <span>
+                            Chef's Choice
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        class="dish-cart-button"
+                        type="button"
+                        data-add-to-cart="dish-01"
+                    >
+                        Add to Cart
+
+                        <span aria-hidden="true">
+                            +
+                        </span>
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- Dish 02 -->
+
+            <article
+                class="dish-card"
+                data-dish-id="dish-02"
+            >
+
+                <div class="dish-image-wrapper">
+
+                    <img
+                        src="./images/dish-02.webp"
+                        alt="Gourmet truffle pasta served at Ember and Spoon"
+                        class="dish-image"
+                        loading="lazy"
+                    >
+
+                    <span class="dish-category">
+                        Pasta
+                    </span>
+
+
+                    <button
+                        class="dish-favorite"
+                        type="button"
+                        aria-label="Add Truffle Ember Pasta to favorites"
+                        aria-pressed="false"
+                    >
+                        ♡
+                    </button>
+
+                </div>
+
+
+                <div class="dish-content">
+
+                    <div class="dish-heading-row">
+
+                        <h3 class="dish-name">
+                            Truffle Ember Pasta
+                        </h3>
+
+                        <span class="dish-price">
+                            $22
+                        </span>
+
+                    </div>
+
+
+                    <p class="dish-description">
+                        Silky handmade pasta tossed with black
+                        truffle, aged parmesan, and roasted
+                        garlic cream.
+                    </p>
+
+
+                    <div class="dish-meta">
+
+                        <span class="dish-rating">
+                            ★ 4.8
+                        </span>
+
+                        <span class="dish-meta-divider"></span>
+
+                        <span>
+                            Guest Favorite
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        class="dish-cart-button"
+                        type="button"
+                        data-add-to-cart="dish-02"
+                    >
+                        Add to Cart
+
+                        <span aria-hidden="true">
+                            +
+                        </span>
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- Dish 03 -->
+
+            <article
+                class="dish-card"
+                data-dish-id="dish-03"
+            >
+
+                <div class="dish-image-wrapper">
+
+                    <img
+                        src="./images/dish-03.webp"
+                        alt="Premium signature burger at Ember and Spoon"
+                        class="dish-image"
+                        loading="lazy"
+                    >
+
+                    <span class="dish-category">
+                        Burgers
+                    </span>
+
+
+                    <button
+                        class="dish-favorite"
+                        type="button"
+                        aria-label="Add Ember Signature Burger to favorites"
+                        aria-pressed="false"
+                    >
+                        ♡
+                    </button>
+
+                </div>
+
+
+                <div class="dish-content">
+
+                    <div class="dish-heading-row">
+
+                        <h3 class="dish-name">
+                            Ember Signature Burger
+                        </h3>
+
+                        <span class="dish-price">
+                            $19
+                        </span>
+
+                    </div>
+
+
+                    <p class="dish-description">
+                        Charred premium beef, smoked cheddar,
+                        caramelized onions, and our house
+                        ember sauce.
+                    </p>
+
+
+                    <div class="dish-meta">
+
+                        <span class="dish-rating">
+                            ★ 4.9
+                        </span>
+
+                        <span class="dish-meta-divider"></span>
+
+                        <span>
+                            Most Popular
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        class="dish-cart-button"
+                        type="button"
+                        data-add-to-cart="dish-03"
+                    >
+                        Add to Cart
+
+                        <span aria-hidden="true">
+                            +
+                        </span>
+                    </button>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =====================================================
+     FOOD CATEGORIES
+     ===================================================== -->
+
+<section class="food-categories section" id="categories">
+
+    <div class="container">
+
+        <div class="section-header categories-header">
+
+            <span class="section-label">
+                Explore Our Menu
+            </span>
+
+            <h2 class="section-title">
+                Something for every
+                <span class="categories-title-accent">
+                    craving.
+                </span>
+            </h2>
+
+            <p class="section-description">
+                From fire-kissed mains to handcrafted desserts,
+                discover flavors designed around the Ember & Spoon
+                experience.
+            </p>
+
+        </div>
+
+
+        <!-- Category Navigation -->
+
+        <div
+            class="category-list"
+            role="tablist"
+            aria-label="Food categories"
+        >
+
+            <button
+                class="category-button active"
+                type="button"
+                role="tab"
+                aria-selected="true"
+                data-category="all"
+            >
+                All
+            </button>
+
+
+            <button
+                class="category-button"
+                type="button"
+                role="tab"
+                aria-selected="false"
+                data-category="starters"
+            >
+                Starters
+            </button>
+
+
+            <button
+                class="category-button"
+                type="button"
+                role="tab"
+                aria-selected="false"
+                data-category="main-course"
+            >
+                Main Course
+            </button>
+
+
+            <button
+                class="category-button"
+                type="button"
+                role="tab"
+                aria-selected="false"
+                data-category="burgers"
+            >
+                Burgers
+            </button>
+
+
+            <button
+                class="category-button"
+                type="button"
+                role="tab"
+                aria-selected="false"
+                data-category="pizza"
+            >
+                Pizza
+            </button>
+
+
+            <button
+                class="category-button"
+                type="button"
+                role="tab"
+                aria-selected="false"
+                data-category="pasta"
+            >
+                Pasta
+            </button>
+
+
+            <button
+                class="category-button"
+                type="button"
+                role="tab"
+                aria-selected="false"
+                data-category="desserts"
+            >
+                Desserts
+            </button>
+
+
+            <button
+                class="category-button"
+                type="button"
+                role="tab"
+                aria-selected="false"
+                data-category="drinks"
+            >
+                Drinks
+            </button>
+
+        </div>
+
+
+        <!-- Small Visual Placeholder Area -->
+
+        <div class="category-intro">
+
+            <div class="category-intro-line"></div>
+
+            <p>
+                Our menu changes with the seasons, but our
+                commitment to bold, thoughtful cooking stays the same.
+            </p>
+
+            <div class="category-intro-line"></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =====================================================
+     CHEF'S WEEKEND SPECIAL
+     ===================================================== -->
+
+<section class="weekend-special section" id="special">
+
+    <div class="container">
+
+        <div class="special-card">
+
+            <!-- Special Content -->
+
+            <div class="special-content">
+
+                <span class="special-eyebrow">
+                    Limited Time
+                </span>
+
+
+                <p class="special-kicker">
+                    Chef's Weekend Special
+                </p>
+
+
+                <h2 class="special-title">
+                    Fire meets
+                    <span>seasonal flavor.</span>
+                </h2>
+
+
+                <p class="special-description">
+                    A limited-time creation inspired by the season,
+                    prepared with carefully selected ingredients and
+                    finished over the flame for an unmistakable Ember
+                    & Spoon character.
+                </p>
+
+
+                <!-- Price -->
+
+                <div class="special-price">
+
+                    <span class="special-price-current">
+                        $24
+                    </span>
+
+                    <span class="special-price-old">
+                        $30
+                    </span>
+
+                    <span class="special-price-note">
+                        Weekend Special
+                    </span>
+
+                </div>
+
+
+                <!-- Countdown -->
+
+                <div
+                    class="countdown"
+                    id="special-countdown"
+                    aria-label="Weekend special countdown"
+                >
+
+                    <div class="countdown-unit">
+
+                        <strong
+                            id="countdown-days"
+                        >
+                            00
+                        </strong>
+
+                        <span>
+                            Days
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="countdown-divider"
+                        aria-hidden="true"
+                    >
+                        :
+                    </div>
+
+
+                    <div class="countdown-unit">
+
+                        <strong
+                            id="countdown-hours"
+                        >
+                            00
+                        </strong>
+
+                        <span>
+                            Hours
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="countdown-divider"
+                        aria-hidden="true"
+                    >
+                        :
+                    </div>
+
+
+                    <div class="countdown-unit">
+
+                        <strong
+                            id="countdown-minutes"
+                        >
+                            00
+                        </strong>
+
+                        <span>
+                            Minutes
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="countdown-divider"
+                        aria-hidden="true"
+                    >
+                        :
+                    </div>
+
+
+                    <div class="countdown-unit">
+
+                        <strong
+                            id="countdown-seconds"
+                        >
+                            00
+                        </strong>
+
+                        <span>
+                            Seconds
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <a
+                    href="menu.html"
+                    class="btn btn-primary special-button"
+                >
+                    Discover the Special
+
+                    <span aria-hidden="true">
+                        →
+                    </span>
+                </a>
+
+            </div>
+
+
+            <!-- Special Image -->
+
+            <div class="special-visual">
+
+                <div class="special-image-wrapper">
+
+                    <img
+                        src="./images/weekend-special.webp"
+                        alt="Chef's weekend special plated at Ember & Spoon"
+                        class="special-image"
+                        loading="lazy"
+                    >
+
+                </div>
+
+
+                <div class="special-image-caption">
+
+                    <span>
+                        This Weekend
+                    </span>
+
+                    <strong>
+                        Crafted for the moment.
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =====================================================
+     WHY CHOOSE US
+     ===================================================== -->
+
+<section class="why-us section">
+
+    <div class="container">
+
+        <!-- Section Header -->
+
+        <div class="why-us-header">
+
+            <div>
+
+                <span class="section-label">
+                    The Ember & Spoon Difference
+                </span>
+
+                <h2 class="section-title">
+                    More than a meal.
+                    <span class="why-title-accent">
+                        It's an experience.
+                    </span>
+                </h2>
+
+            </div>
+
+
+            <p class="why-us-intro">
+                Every detail matters — from the ingredients we
+                select to the moment your plate reaches the table.
+            </p>
+
+        </div>
+
+
+        <!-- Feature Cards -->
+
+        <div class="why-us-grid">
+
+
+            <!-- Feature 1 -->
+
+            <article class="why-card">
+
+                <div class="why-card-number">
+                    01
+                </div>
+
+                <div class="why-card-icon" aria-hidden="true">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                    >
+                        <path
+                            d="M12 21s-7-4.35-7-10a4 4 0 0 1 7-2.65A4 4 0 0 1 19 11c0 5.65-7 10-7 10Z"
+                        ></path>
+
+                        <path
+                            d="M12 8v5"
+                        ></path>
+
+                        <path
+                            d="M9.5 10.5h5"
+                        ></path>
+                    </svg>
+
+                </div>
+
+                <h3>
+                    Fresh Ingredients
+                </h3>
+
+                <p>
+                    Seasonal produce, carefully selected proteins,
+                    and quality ingredients form the foundation of
+                    every dish we serve.
+                </p>
+
+            </article>
+
+
+            <!-- Feature 2 -->
+
+            <article class="why-card">
+
+                <div class="why-card-number">
+                    02
+                </div>
+
+                <div class="why-card-icon" aria-hidden="true">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                    >
+                        <path
+                            d="M7 3v8"
+                        ></path>
+
+                        <path
+                            d="M4 3v5a3 3 0 0 0 6 0V3"
+                        ></path>
+
+                        <path
+                            d="M7 11v10"
+                        ></path>
+
+                        <path
+                            d="M17 3v18"
+                        ></path>
+
+                        <path
+                            d="M17 3a4 4 0 0 1 0 8"
+                        ></path>
+                    </svg>
+
+                </div>
+
+                <h3>
+                    Expert Chefs
+                </h3>
+
+                <p>
+                    Our kitchen combines traditional techniques
+                    with modern creativity to turn familiar flavors
+                    into something memorable.
+                </p>
+
+            </article>
+
+
+            <!-- Feature 3 -->
+
+            <article class="why-card">
+
+                <div class="why-card-number">
+                    03
+                </div>
+
+                <div class="why-card-icon" aria-hidden="true">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                    >
+                        <circle
+                            cx="12"
+                            cy="12"
+                            r="8"
+                        ></circle>
+
+                        <path
+                            d="M12 7v5l3 2"
+                        ></path>
+                    </svg>
+
+                </div>
+
+                <h3>
+                    Fast Service
+                </h3>
+
+                <p>
+                    Great food deserves great timing. We keep the
+                    experience smooth, attentive, and efficient
+                    without sacrificing quality.
+                </p>
+
+            </article>
+
+
+            <!-- Feature 4 -->
+
+            <article class="why-card">
+
+                <div class="why-card-number">
+                    04
+                </div>
+
+                <div class="why-card-icon" aria-hidden="true">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                    >
+                        <path
+                            d="M12 3v18"
+                        ></path>
+
+                        <path
+                            d="M5 8c0-2 2-3 4-3h3"
+                        ></path>
+
+                        <path
+                            d="M19 16c0 2-2 3-4 3h-3"
+                        ></path>
+
+                        <path
+                            d="M5 16c0 2 2 3 4 3"
+                        ></path>
+
+                        <path
+                            d="M19 8c0-2-2-3-4-3"
+                        ></path>
+                    </svg>
+
+                </div>
+
+                <h3>
+                    Handcrafted Recipes
+                </h3>
+
+                <p>
+                    From sauces to finishing touches, thoughtful
+                    preparation brings character and depth to
+                    every plate.
+                </p>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
     
     <!-- =====================================================
      FOOTER
