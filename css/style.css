@@ -3652,7 +3652,7 @@ h4 {
    WHY RESPONSIVE — TABLET
    ========================================================= */
 
-@media (max-width: 1024px) {
+@media (max-width: 900px) {
 
     .why-us-grid {
         grid-template-columns:
@@ -3677,7 +3677,6 @@ h4 {
     }
 
 }
-
 
 /* =========================================================
    WHY RESPONSIVE — MOBILE
