@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Explore the Ember & Spoon menu — handcrafted dishes, bold flavors, and seasonal favorites."
+    >
+
+    <title>Menu | Ember & Spoon</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+    <!-- =====================================================
+         HEADER / NAVIGATION
+         ===================================================== -->
+
+    <header class="site-header" id="site-header">
+
+        <nav
+            class="navbar container"
+            aria-label="Main navigation"
+        >
+
+            <!-- Logo -->
+
+            <a
+                href="index.html"
+                class="navbar-logo"
+                aria-label="Ember & Spoon Home"
+            >
+
+                <span class="navbar-logo-main">
+                    EMBER
+                </span>
+
+                <span class="navbar-logo-sub">
+                    & SPOON
+                </span>
+
+            </a>
+
+
+            <!-- Navigation -->
+
+            <div
+                class="navbar-nav"
+                id="main-navigation"
+            >
+
+                <a
+                    href="index.html"
+                    class="navbar-link"
+                >
+                    Home
+                </a>
+
+
+                <a
+                    href="menu.html"
+                    class="navbar-link active"
+                    aria-current="page"
+                >
+                    Menu
+                </a>
+
+
+                <a
+                    href="about.html"
+                    class="navbar-link"
+                >
+                    About
+                </a>
+
+
+                <a
+                    href="reservations.html"
+                    class="navbar-link"
+                >
+                    Reservations
+                </a>
+
+
+                <a
+                    href="contact.html"
+                    class="navbar-link"
+                >
+                    Contact
+                </a>
+
+            </div>
+
+
+            <!-- Actions -->
+
+            <div class="navbar-actions">
+
+                <a
+                    href="cart.html"
+                    class="navbar-cart"
+                    aria-label="Shopping cart"
+                >
+
+                    <svg
+                        class="cart-icon"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                        focusable="false"
+                    >
+
+                        <path
+                            d="M3 3h2l2.4 11.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.6L21 7H6"
+                        ></path>
+
+                        <circle
+                            cx="10"
+                            cy="19"
+                            r="1.2"
+                        ></circle>
+
+                        <circle
+                            cx="18"
+                            cy="19"
+                            r="1.2"
+                        ></circle>
+
+                    </svg>
+
+
+                    <span
+                        class="cart-count"
+                        id="cart-count"
+                        aria-label="0 items in cart"
+                    >
+                        0
+                    </span>
+
+                </a>
+
+
+                <button
+                    class="navbar-toggle"
+                    id="navbar-toggle"
+                    type="button"
+                    aria-label="Open navigation menu"
+                    aria-expanded="false"
+                    aria-controls="main-navigation"
+                >
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </button>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+         ===================================================== -->
+
+    <main>
+
+        <!-- Menu Hero -->
+
+        <section class="menu-hero">
+
+            <div class="container menu-hero-container">
+
+                <div class="menu-hero-content">
+
+                    <span class="section-label">
+                        The Ember & Spoon Menu
+                    </span>
+
+                    <h1 class="menu-hero-title">
+                        Come hungry.
+                        <span>Leave inspired.</span>
+                    </h1>
+
+                    <p class="menu-hero-description">
+                        Explore dishes built around flame, fresh
+                        ingredients, thoughtful technique, and the
+                        flavors our guests keep coming back for.
+                    </p>
+
+                </div>
+
+
+                <div class="menu-hero-note">
+
+                    <span>
+                        Crafted daily
+                    </span>
+
+                    <strong>
+                        Seasonal ingredients.
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Menu Controls -->
+
+        <section class="menu-section section">
+
+            <div class="container">
+
+                <div class="menu-controls">
+
+                    <!-- Search -->
+
+                    <div class="menu-search">
+
+                        <label
+                            for="menu-search-input"
+                            class="sr-only"
+                        >
+                            Search menu
+                        </label>
+
+                        <svg
+                            class="menu-search-icon"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                        >
+
+                            <circle
+                                cx="11"
+                                cy="11"
+                                r="6"
+                            ></circle>
+
+                            <path
+                                d="m16 16 5 5"
+                            ></path>
+
+                        </svg>
+
+                        <input
+                            type="search"
+                            id="menu-search-input"
+                            placeholder="Search dishes..."
+                            autocomplete="off"
+                        >
+
+                    </div>
+
+
+                    <!-- Sort -->
+
+                    <div class="menu-sort">
+
+                        <label
+                            for="menu-sort-select"
+                        >
+                            Sort by
+                        </label>
+
+                        <select
+                            id="menu-sort-select"
+                        >
+
+                            <option value="default">
+                                Featured
+                            </option>
+
+                            <option value="price-low">
+                                Price: Low to High
+                            </option>
+
+                            <option value="price-high">
+                                Price: High to Low
+                            </option>
+
+                            <option value="rating">
+                                Rating
+                            </option>
+
+                            <option value="popularity">
+                                Popularity
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Category Filters -->
+
+                <div
+                    class="menu-filter-group"
+                    aria-label="Menu categories"
+                >
+
+                    <span class="menu-filter-title">
+                        Category
+                    </span>
+
+
+                    <div class="menu-filter-list">
+
+                        <button
+                            class="menu-filter-button active"
+                            type="button"
+                            data-filter-group="category"
+                            data-category="all"
+                            aria-pressed="true"
+                        >
+                            All
+                        </button>
+
+
+                        <button
+                            class="menu-filter-button"
+                            type="button"
+                            data-filter-group="category"
+                            data-category="starters"
+                            aria-pressed="false"
+                        >
+                            Starters
+                        </button>
+
+
+                        <button
+                            class="menu-filter-button"
+                            type="button"
+                            data-filter-group="category"
+                            data-category="main-course"
+                            aria-pressed="false"
+                        >
+                            Main Course
+                        </button>
+
+
+                        <button
+                            class="menu-filter-button"
+                            type="button"
+                            data-filter-group="category"
+                            data-category="pizza"
+                            aria-pressed="false"
+                        >
+                            Pizza
+                        </button>
+
+
+                        <button
+                            class="menu-filter-button"
+                            type="button"
+                            data-filter-group="category"
+                            data-category="burgers"
+                            aria-pressed="false"
+                        >
+                            Burgers
+                        </button>
+
+
+                        <button
+                            class="menu-filter-button"
+                            type="button"
+                            data-filter-group="category"
+                            data-category="pasta"
+                            aria-pressed="false"
+                        >
+                            Pasta
+                        </button>
+
+
+                        <button
+                            class="menu-filter-button"
+                            type="button"
+                            data-filter-group="category"
+                            data-category="desserts"
+                            aria-pressed="false"
+                        >
+                            Desserts
+                        </button>
+
+
+                        <button
+                            class="menu-filter-button"
+                            type="button"
+                            data-filter-group="category"
+                            data-category="drinks"
+                            aria-pressed="false"
+                        >
+                            Drinks
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Dietary Filters -->
+
+                <div
+                    class="menu-filter-group"
+                    aria-label="Dietary preferences"
+                >
+
+                    <span class="menu-filter-title">
+                        Dietary
+                    </span>
+
+
+                    <div class="menu-filter-list">
+
+                        <button
+                            class="menu-filter-button"
+                            type="button"
+                            data-filter-group="diet"
+                            data-diet="vegetarian"
+                            aria-pressed="false"
+                        >
+                            Vegetarian
+                        </button>
+
+
+                        <button
+                            class="menu-filter-button"
+                            type="button"
+                            data-filter-group="diet"
+                            data-diet="vegan"
+                            aria-pressed="false"
+                        >
+                            Vegan
+                        </button>
+
+
+                        <button
+                            class="menu-filter-button"
+                            type="button"
+                            data-filter-group="diet"
+                            data-diet="spicy"
+                            aria-pressed="false"
+                        >
+                            Spicy
+                        </button>
+
+
+                        <button
+                            class="menu-filter-button"
+                            type="button"
+                            data-filter-group="diet"
+                            data-diet="gluten-free"
+                            aria-pressed="false"
+                        >
+                            Gluten-Free
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Menu Results Header -->
+
+                <div class="menu-results-header">
+
+                    <p>
+                        <strong id="menu-result-count">
+                            0
+                        </strong>
+
+                        dishes found
+                    </p>
+
+
+                    <button
+                        type="button"
+                        class="menu-clear-filters"
+                        id="menu-clear-filters"
+                    >
+                        Clear filters
+                    </button>
+
+                </div>
+
+
+                <!-- Dish Grid -->
+
+                <div
+                    class="menu-grid"
+                    id="menu-grid"
+                >
+                    <!-- JavaScript will render dishes here -->
+                </div>
+
+
+                <!-- Empty State -->
+
+                <div
+                    class="menu-empty-state"
+                    id="menu-empty-state"
+                    hidden
+                >
+
+                    <div
+                        class="menu-empty-icon"
+                        aria-hidden="true"
+                    >
+                        —
+                    </div>
+
+                    <h2>
+                        Nothing matched your search.
+                    </h2>
+
+                    <p>
+                        Try another dish name, category, or dietary
+                        preference.
+                    </p>
+
+                    <button
+                        type="button"
+                        class="btn btn-dark"
+                        id="menu-empty-reset"
+                    >
+                        Reset Filters
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="site-footer">
+
+        <div class="container">
+
+            <div class="footer-main">
+
+                <!-- Brand -->
+
+                <div class="footer-brand">
+
+                    <a
+                        href="index.html"
+                        class="footer-logo"
+                        aria-label="Ember & Spoon Home"
+                    >
+
+                        <span class="footer-logo-main">
+                            EMBER
+                        </span>
+
+                        <span class="footer-logo-sub">
+                            & SPOON
+                        </span>
+
+                    </a>
+
+
+                    <p class="footer-description">
+                        Crafted with fire. Served with passion.
+                        A modern culinary experience built around
+                        bold flavors, thoughtful ingredients, and
+                        warm hospitality.
+                    </p>
+
+                </div>
+
+
+                <!-- Navigation -->
+
+                <div class="footer-column">
+
+                    <h2 class="footer-heading">
+                        Explore
+                    </h2>
+
+                    <ul class="footer-links">
+
+                        <li>
+                            <a href="index.html">
+                                Home
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="menu.html">
+                                Menu
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="about.html">
+                                About
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="reservations.html">
+                                Reservations
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="contact.html">
+                                Contact
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- Contact -->
+
+                <div class="footer-column">
+
+                    <h2 class="footer-heading">
+                        Visit Us
+                    </h2>
+
+                    <address class="footer-contact">
+
+                        <p>
+                            24 Ember Lane
+                            <br>
+                            Culinary District
+                        </p>
+
+                        <a href="tel:+0000000000">
+                            +00 000 000 0000
+                        </a>
+
+                        <a href="mailto:hello@emberandspoon.com">
+                            hello@emberandspoon.com
+                        </a>
+
+                    </address>
+
+                </div>
+
+
+                <!-- Hours -->
+
+                <div class="footer-column">
+
+                    <h2 class="footer-heading">
+                        Opening Hours
+                    </h2>
+
+                    <div class="footer-hours">
+
+                        <div class="footer-hours-row">
+
+                            <span>
+                                Monday – Thursday
+                            </span>
+
+                            <span>
+                                12:00 – 22:00
+                            </span>
+
+                        </div>
+
+
+                        <div class="footer-hours-row">
+
+                            <span>
+                                Friday – Saturday
+                            </span>
+
+                            <span>
+                                12:00 – 23:30
+                            </span>
+
+                        </div>
+
+
+                        <div class="footer-hours-row">
+
+                            <span>
+                                Sunday
+                            </span>
+
+                            <span>
+                                13:00 – 21:00
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <p>
+                    © <span id="current-year"></span>
+                    Ember & Spoon. All rights reserved.
+                </p>
+
+
+                <div class="footer-socials">
+
+                    <a
+                        href="#"
+                        aria-label="Instagram"
+                    >
+                        Instagram
+                    </a>
+
+                    <a
+                        href="#"
+                        aria-label="Facebook"
+                    >
+                        Facebook
+                    </a>
+
+                    <a
+                        href="#"
+                        aria-label="TikTok"
+                    >
+                        TikTok
+                    </a>
+
+                </div>
+
+
+                <a
+                    href="menu.html"
+                    class="footer-top-link"
+                >
+                    Explore Menu →
+                </a>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>
