@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Review your Ember & Spoon order."
+    >
+
+    <title>Your Cart | Ember & Spoon</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+    <!-- =====================================================
+         HEADER / NAVIGATION
+         ===================================================== -->
+
+    <header class="site-header" id="site-header">
+
+        <nav
+            class="navbar container"
+            aria-label="Main navigation"
+        >
+
+            <a
+                href="index.html"
+                class="navbar-logo"
+                aria-label="Ember & Spoon Home"
+            >
+
+                <span class="navbar-logo-main">
+                    EMBER
+                </span>
+
+                <span class="navbar-logo-sub">
+                    & SPOON
+                </span>
+
+            </a>
+
+
+            <div
+                class="navbar-nav"
+                id="main-navigation"
+            >
+
+                <a
+                    href="index.html"
+                    class="navbar-link"
+                >
+                    Home
+                </a>
+
+
+                <a
+                    href="menu.html"
+                    class="navbar-link active"
+                >
+                    Menu
+                </a>
+
+
+                <a
+                    href="about.html"
+                    class="navbar-link"
+                >
+                    About
+                </a>
+
+
+                <a
+                    href="reservations.html"
+                    class="navbar-link"
+                >
+                    Reservations
+                </a>
+
+
+                <a
+                    href="contact.html"
+                    class="navbar-link"
+                >
+                    Contact
+                </a>
+
+            </div>
+
+
+            <div class="navbar-actions">
+
+                <a
+                    href="cart.html"
+                    class="navbar-cart"
+                    aria-label="Shopping cart"
+                    aria-current="page"
+                >
+
+                    <svg
+                        class="cart-icon"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                        focusable="false"
+                    >
+
+                        <path
+                            d="M3 3h2l2.4 11.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.6L21 7H6"
+                        ></path>
+
+                        <circle
+                            cx="10"
+                            cy="19"
+                            r="1.2"
+                        ></circle>
+
+                        <circle
+                            cx="18"
+                            cy="19"
+                            r="1.2"
+                        ></circle>
+
+                    </svg>
+
+
+                    <span
+                        class="cart-count"
+                        id="cart-count"
+                        aria-label="0 items in cart"
+                    >
+                        0
+                    </span>
+
+                </a>
+
+
+                <button
+                    class="navbar-toggle"
+                    id="navbar-toggle"
+                    type="button"
+                    aria-label="Open navigation menu"
+                    aria-expanded="false"
+                    aria-controls="main-navigation"
+                >
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </button>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+         ===================================================== -->
+
+    <main>
+
+        <section class="cart-section section">
+
+            <div class="container">
+
+                <div class="cart-page-header">
+
+                    <span class="section-label">
+                        Your Selection
+                    </span>
+
+                    <h1 class="cart-page-title">
+                        Your table starts
+                        <span>with the right dish.</span>
+                    </h1>
+
+                    <p class="cart-page-description">
+                        Review your selections before continuing
+                        to the next step.
+                    </p>
+
+                </div>
+
+
+                <!-- Cart Layout -->
+
+                <div
+                    class="cart-layout"
+                    id="cart-layout"
+                >
+
+                    <!-- Cart Items -->
+
+                    <div class="cart-items-column">
+
+                        <div class="cart-items-header">
+
+                            <h2>
+                                Your Order
+                            </h2>
+
+                            <button
+                                type="button"
+                                class="cart-clear-button"
+                                id="cart-clear-button"
+                            >
+                                Clear Cart
+                            </button>
+
+                        </div>
+
+
+                        <div
+                            class="cart-items"
+                            id="cart-items"
+                        >
+                            <!-- JavaScript will render cart items -->
+                        </div>
+
+                    </div>
+
+
+                    <!-- Cart Summary -->
+
+                    <aside
+                        class="cart-summary"
+                        aria-label="Order summary"
+                    >
+
+                        <h2>
+                            Order Summary
+                        </h2>
+
+
+                        <div class="cart-summary-row">
+
+                            <span>
+                                Subtotal
+                            </span>
+
+                            <strong id="cart-subtotal">
+                                $0.00
+                            </strong>
+
+                        </div>
+
+
+                        <div class="cart-summary-row">
+
+                            <span>
+                                Delivery
+                            </span>
+
+                            <strong id="cart-delivery">
+                                $0.00
+                            </strong>
+
+                        </div>
+
+
+                        <div class="cart-summary-row">
+
+                            <span>
+                                Tax
+                            </span>
+
+                            <strong id="cart-tax">
+                                $0.00
+                            </strong>
+
+                        </div>
+
+
+                        <div class="cart-discount-row">
+
+                            <span>
+                                Weekend Offer
+                            </span>
+
+                            <strong id="cart-discount">
+                                − $0.00
+                            </strong>
+
+                        </div>
+
+
+                        <div class="cart-summary-divider"></div>
+
+
+                        <div
+                            class="cart-total-row"
+                            aria-live="polite"
+                        >
+
+                            <span>
+                                Total
+                            </span>
+
+                            <strong id="cart-total">
+                                $0.00
+                            </strong>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="btn btn-primary cart-checkout-button"
+                            id="cart-checkout-button"
+                        >
+                            Continue to Checkout
+                            <span aria-hidden="true">
+                                →
+                            </span>
+                        </button>
+
+
+                        <p class="cart-checkout-note">
+                            Checkout is currently a frontend
+                            prototype. No payment will be processed.
+                        </p>
+
+                    </aside>
+
+                </div>
+
+
+                <!-- Empty Cart -->
+
+                <div
+                    class="cart-empty-state"
+                    id="cart-empty-state"
+                    hidden
+                >
+
+                    <div
+                        class="cart-empty-icon"
+                        aria-hidden="true"
+                    >
+                        ♡
+                    </div>
+
+                    <h2>
+                        Your cart is waiting.
+                    </h2>
+
+                    <p>
+                        Explore our menu and find something worth
+                        coming back for.
+                    </p>
+
+                    <a
+                        href="menu.html"
+                        class="btn btn-dark"
+                    >
+                        Explore Menu
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         TOAST NOTIFICATION
+         ===================================================== -->
+
+    <div
+        class="toast"
+        id="toast"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+    ></div>
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="site-footer">
+
+        <div class="container">
+
+            <div class="footer-main">
+
+                <div class="footer-brand">
+
+                    <a
+                        href="index.html"
+                        class="footer-logo"
+                        aria-label="Ember & Spoon Home"
+                    >
+
+                        <span class="footer-logo-main">
+                            EMBER
+                        </span>
+
+                        <span class="footer-logo-sub">
+                            & SPOON
+                        </span>
+
+                    </a>
+
+                    <p class="footer-description">
+                        Crafted with fire. Served with passion.
+                        A modern culinary experience built around
+                        bold flavors, thoughtful ingredients, and
+                        warm hospitality.
+                    </p>
+
+                </div>
+
+
+                <div class="footer-column">
+
+                    <h2 class="footer-heading">
+                        Explore
+                    </h2>
+
+                    <ul class="footer-links">
+
+                        <li>
+                            <a href="index.html">
+                                Home
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="menu.html">
+                                Menu
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="about.html">
+                                About
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="reservations.html">
+                                Reservations
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="contact.html">
+                                Contact
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="footer-column">
+
+                    <h2 class="footer-heading">
+                        Visit Us
+                    </h2>
+
+                    <address class="footer-contact">
+
+                        <p>
+                            24 Ember Lane
+                            <br>
+                            Culinary District
+                        </p>
+
+                        <a href="tel:+0000000000">
+                            +00 000 000 0000
+                        </a>
+
+                        <a href="mailto:hello@emberandspoon.com">
+                            hello@emberandspoon.com
+                        </a>
+
+                    </address>
+
+                </div>
+
+
+                <div class="footer-column">
+
+                    <h2 class="footer-heading">
+                        Opening Hours
+                    </h2>
+
+                    <div class="footer-hours">
+
+                        <div class="footer-hours-row">
+
+                            <span>
+                                Monday – Thursday
+                            </span>
+
+                            <span>
+                                12:00 – 22:00
+                            </span>
+
+                        </div>
+
+
+                        <div class="footer-hours-row">
+
+                            <span>
+                                Friday – Saturday
+                            </span>
+
+                            <span>
+                                12:00 – 23:30
+                            </span>
+
+                        </div>
+
+
+                        <div class="footer-hours-row">
+
+                            <span>
+                                Sunday
+                            </span>
+
+                            <span>
+                                13:00 – 21:00
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <p>
+                    © <span id="current-year"></span>
+                    Ember & Spoon. All rights reserved.
+                </p>
+
+
+                <div class="footer-socials">
+
+                    <a
+                        href="#"
+                        aria-label="Instagram"
+                    >
+                        Instagram
+                    </a>
+
+                    <a
+                        href="#"
+                        aria-label="Facebook"
+                    >
+                        Facebook
+                    </a>
+
+                    <a
+                        href="#"
+                        aria-label="TikTok"
+                    >
+                        TikTok
+                    </a>
+
+                </div>
+
+
+                <a
+                    href="menu.html"
+                    class="footer-top-link"
+                >
+                    Explore Menu →
+                </a>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>

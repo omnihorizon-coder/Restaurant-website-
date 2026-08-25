@@ -1488,3 +1488,1365 @@ if (newsletterForm) {
     );
 
 }
+/* =========================================================
+   8. FOOD DETAIL PAGE
+   ========================================================= */
+
+const foodDetailContainer =
+    document.querySelector(
+        "#food-detail-container"
+    );
+
+
+if (foodDetailContainer) {
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    const dishId =
+        params.get("id");
+
+
+    const selectedDish =
+        dishes.find(
+            (dish) =>
+                dish.id === dishId
+        );
+
+
+    /*
+        Show an error if the URL doesn't contain a valid
+        dish ID.
+    */
+
+    if (!selectedDish) {
+
+        foodDetailContainer.innerHTML = `
+            <div class="food-detail-error">
+
+                <span class="section-label">
+                    Ember & Spoon
+                </span>
+
+                <h1>
+                    Dish not found.
+                </h1>
+
+                <p>
+                    We couldn't find the dish you're looking for.
+                </p>
+
+                <a
+                    href="menu.html"
+                    class="btn btn-dark"
+                >
+                    Return to Menu
+                </a>
+
+            </div>
+        `;
+
+    } else {
+
+        const ingredientsMarkup =
+            selectedDish.ingredients
+                .map(
+                    (ingredient) => `
+                        <span class="food-detail-ingredient">
+                            ${ingredient}
+                        </span>
+                    `
+                )
+                .join("");
+
+
+        foodDetailContainer.innerHTML = `
+            <div class="food-detail-layout">
+
+
+                <!-- Dish Image -->
+
+                <div class="food-detail-image-wrapper">
+
+                    <img
+                        src="${selectedDish.image}"
+                        alt="${selectedDish.name}"
+                        class="food-detail-image"
+                    >
+
+                </div>
+
+
+                <!-- Dish Content -->
+
+                <div class="food-detail-content">
+
+                    <span class="food-detail-category">
+                        ${selectedDish.category
+                            .replace("-", " ")}
+                    </span>
+
+
+                    <h1 class="food-detail-title">
+                        ${selectedDish.name}
+                    </h1>
+
+
+                    <div class="food-detail-rating">
+
+                        <span class="food-detail-stars">
+                            ★★★★★
+                        </span>
+
+                        <span class="food-detail-rating-score">
+                            ${selectedDish.rating}
+                            · Guest Rating
+                        </span>
+
+                    </div>
+
+
+                    <p class="food-detail-price">
+                        $${selectedDish.price}
+                    </p>
+
+
+                    <p class="food-detail-description">
+                        ${selectedDish.description}
+                    </p>
+
+
+                    <!-- Nutrition / Info -->
+
+                    <div class="food-detail-info">
+
+                        <div class="food-detail-info-item">
+
+                            <span>
+                                Calories
+                            </span>
+
+                            <strong>
+                                ${selectedDish.calories} kcal
+                            </strong>
+
+                        </div>
+
+
+                        <div class="food-detail-info-item">
+
+                            <span>
+                                Spice Level
+                            </span>
+
+                            <strong>
+                                ${selectedDish.spiceLevel}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="food-detail-info-item">
+
+                            <span>
+                                Popularity
+                            </span>
+
+                            <strong>
+                                ${selectedDish.popularity}/100
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Ingredients -->
+
+                    <div class="food-detail-subsection">
+
+                        <h2>
+                            Ingredients
+                        </h2>
+
+                        <div
+                            class="food-detail-ingredients"
+                        >
+                            ${ingredientsMarkup}
+                        </div>
+
+                    </div>
+
+
+                    <!-- Actions -->
+
+                    <div class="food-detail-actions">
+
+                        <div class="food-detail-quantity">
+
+                            <button
+                                type="button"
+                                class="quantity-button"
+                                id="detail-quantity-minus"
+                                aria-label="Decrease quantity"
+                            >
+                                −
+                            </button>
+
+
+                            <span
+                                class="quantity-value"
+                                id="detail-quantity"
+                            >
+                                1
+                            </span>
+
+
+                            <button
+                                type="button"
+                                class="quantity-button"
+                                id="detail-quantity-plus"
+                                aria-label="Increase quantity"
+                            >
+                                +
+                            </button>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="btn btn-primary food-detail-add-button"
+                            id="detail-add-to-cart"
+                        >
+                            Add to Cart
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="food-detail-favorite"
+                            id="detail-favorite"
+                            aria-label="Add dish to favorites"
+                            aria-pressed="false"
+                        >
+                            ♡
+                        </button>
+
+                    </div>
+
+
+                    <!-- Allergen Information -->
+
+                    <p class="food-detail-allergens">
+                        Please inform our team about any food
+                        allergies or dietary requirements before
+                        ordering. Ingredients may vary seasonally.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Related Dishes -->
+
+            <section class="related-dishes">
+
+                <div class="related-dishes-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            You May Also Like
+                        </span>
+
+                        <h2>
+                            More from the kitchen.
+                        </h2>
+
+                    </div>
+
+                    <a
+                        href="menu.html"
+                        class="featured-menu-link"
+                    >
+                        View Full Menu →
+                    </a>
+
+                </div>
+
+
+                <div
+                    class="related-dishes-grid"
+                    id="related-dishes-grid"
+                >
+                    <!-- JavaScript will render related dishes -->
+                </div>
+
+            </section>
+        `;
+
+
+        /* =====================================================
+           DETAIL QUANTITY
+           ===================================================== */
+
+        const quantityElement =
+            document.querySelector(
+                "#detail-quantity"
+            );
+
+        const minusButton =
+            document.querySelector(
+                "#detail-quantity-minus"
+            );
+
+        const plusButton =
+            document.querySelector(
+                "#detail-quantity-plus"
+            );
+
+
+        let quantity = 1;
+
+
+        const updateQuantity = () => {
+
+            quantityElement.textContent =
+                quantity;
+
+        };
+
+
+        minusButton.addEventListener(
+            "click",
+            () => {
+
+                if (quantity > 1) {
+
+                    quantity -= 1;
+
+                    updateQuantity();
+
+                }
+
+            }
+        );
+
+
+        plusButton.addEventListener(
+            "click",
+            () => {
+
+                if (quantity < 20) {
+
+                    quantity += 1;
+
+                    updateQuantity();
+
+                }
+
+            }
+        );
+
+
+        /* =====================================================
+           DETAIL FAVORITE BUTTON
+           ===================================================== */
+
+        const favoriteButton =
+            document.querySelector(
+                "#detail-favorite"
+            );
+
+
+        favoriteButton.addEventListener(
+            "click",
+            () => {
+
+                const isPressed =
+                    favoriteButton.getAttribute(
+                        "aria-pressed"
+                    ) === "true";
+
+
+                favoriteButton.setAttribute(
+                    "aria-pressed",
+                    String(!isPressed)
+                );
+
+
+                favoriteButton.classList.toggle(
+                    "active",
+                    !isPressed
+                );
+
+
+                favoriteButton.textContent =
+                    !isPressed
+                        ? "♥"
+                        : "♡";
+
+            }
+        );
+
+
+        /* =====================================================
+           RELATED DISHES
+           ===================================================== */
+
+        const relatedGrid =
+            document.querySelector(
+                "#related-dishes-grid"
+            );
+
+
+        if (relatedGrid) {
+
+            const relatedDishes =
+                dishes
+                    .filter(
+                        (dish) =>
+                            dish.id !== selectedDish.id &&
+                            (
+                                dish.category ===
+                                selectedDish.category
+                            )
+                    )
+                    .slice(0, 3);
+
+
+            relatedGrid.innerHTML =
+                relatedDishes
+                    .map(
+                        (dish) => `
+                            <article class="menu-dish-card">
+
+                                <div class="menu-dish-image-wrapper">
+
+                                    <img
+                                        src="${dish.image}"
+                                        alt="${dish.name}"
+                                        class="menu-dish-image"
+                                        loading="lazy"
+                                    >
+
+                                </div>
+
+
+                                <div class="menu-dish-content">
+
+                                    <div class="menu-dish-heading">
+
+                                        <h3
+                                            class="menu-dish-name"
+                                        >
+                                            ${dish.name}
+                                        </h3>
+
+                                        <span
+                                            class="menu-dish-price"
+                                        >
+                                            $${dish.price}
+                                        </span>
+
+                                    </div>
+
+
+                                    <div class="menu-dish-meta">
+
+                                        <span
+                                            class="menu-dish-rating"
+                                        >
+                                            ★ ${dish.rating}
+                                        </span>
+
+                                    </div>
+
+
+                                    <div class="menu-dish-actions">
+
+                                        <a
+                                            href="food-detail.html?id=${dish.id}"
+                                            class="menu-view-details"
+                                        >
+                                            View Details
+                                        </a>
+
+                                    </div>
+
+                                </div>
+
+                            </article>
+                        `
+                    )
+                    .join("");
+
+        }
+
+    }
+
+}
+/* =========================================================
+   9. CART SYSTEM
+   ========================================================= */
+
+let cart = [];
+
+
+/* =========================================================
+   CART DOM ELEMENTS
+   ========================================================= */
+
+const cartItemsContainer =
+    document.querySelector("#cart-items");
+
+const cartLayout =
+    document.querySelector("#cart-layout");
+
+const cartEmptyState =
+    document.querySelector("#cart-empty-state");
+
+const cartSubtotal =
+    document.querySelector("#cart-subtotal");
+
+const cartDelivery =
+    document.querySelector("#cart-delivery");
+
+const cartTax =
+    document.querySelector("#cart-tax");
+
+const cartDiscount =
+    document.querySelector("#cart-discount");
+
+const cartTotal =
+    document.querySelector("#cart-total");
+
+const cartCount =
+    document.querySelector("#cart-count");
+
+const cartClearButton =
+    document.querySelector("#cart-clear-button");
+
+const cartCheckoutButton =
+    document.querySelector("#cart-checkout-button");
+
+const toastElement =
+    document.querySelector("#toast");
+
+
+/* =========================================================
+   CART TOAST
+   ========================================================= */
+
+let toastTimeout;
+
+
+const showToast = (message) => {
+
+    if (!toastElement) {
+        return;
+    }
+
+
+    toastElement.textContent =
+        message;
+
+
+    toastElement.classList.add(
+        "show"
+    );
+
+
+    clearTimeout(toastTimeout);
+
+
+    toastTimeout = setTimeout(
+        () => {
+
+            toastElement.classList.remove(
+                "show"
+            );
+
+        },
+        2200
+    );
+
+};
+
+
+/* =========================================================
+   FIND DISH
+   ========================================================= */
+
+const findDishById = (dishId) => {
+
+    return dishes.find(
+        (dish) =>
+            dish.id === dishId
+    );
+
+};
+
+
+/* =========================================================
+   ADD TO CART
+   ========================================================= */
+
+const addToCart = (
+    dishId,
+    quantity = 1
+) => {
+
+    const dish =
+        findDishById(dishId);
+
+
+    if (!dish) {
+        return;
+    }
+
+
+    const existingItem =
+        cart.find(
+            (item) =>
+                item.id === dishId
+        );
+
+
+    if (existingItem) {
+
+        existingItem.quantity +=
+            quantity;
+
+    } else {
+
+        cart.push({
+            id: dish.id,
+            quantity
+        });
+
+    }
+
+
+    renderCart();
+
+    updateCartCount();
+
+    showToast(
+        `${dish.name} added to cart`
+    );
+
+};
+
+
+/* =========================================================
+   CHANGE CART QUANTITY
+   ========================================================= */
+
+const changeCartQuantity = (
+    dishId,
+    change
+) => {
+
+    const cartItem =
+        cart.find(
+            (item) =>
+                item.id === dishId
+        );
+
+
+    if (!cartItem) {
+        return;
+    }
+
+
+    cartItem.quantity += change;
+
+
+    if (cartItem.quantity <= 0) {
+
+        removeFromCart(dishId);
+
+        return;
+
+    }
+
+
+    renderCart();
+
+    updateCartCount();
+
+};
+
+
+/* =========================================================
+   REMOVE ITEM
+   ========================================================= */
+
+const removeFromCart = (
+    dishId
+) => {
+
+    const dish =
+        findDishById(dishId);
+
+
+    cart =
+        cart.filter(
+            (item) =>
+                item.id !== dishId
+        );
+
+
+    renderCart();
+
+    updateCartCount();
+
+
+    if (dish) {
+
+        showToast(
+            `${dish.name} removed from cart`
+        );
+
+    }
+
+};
+
+
+/* =========================================================
+   CLEAR CART
+   ========================================================= */
+
+const clearCart = () => {
+
+    if (cart.length === 0) {
+        return;
+    }
+
+
+    cart = [];
+
+
+    renderCart();
+
+    updateCartCount();
+
+    showToast(
+        "Cart cleared"
+    );
+
+};
+
+
+/* =========================================================
+   CART COUNT
+   ========================================================= */
+
+const updateCartCount = () => {
+
+    const totalItems =
+        cart.reduce(
+            (total, item) =>
+                total + item.quantity,
+            0
+        );
+
+
+    /*
+        Update navbar badge if it exists.
+    */
+
+    if (cartCount) {
+
+        cartCount.textContent =
+            totalItems;
+
+
+        cartCount.setAttribute(
+            "aria-label",
+            `${totalItems} items in cart`
+        );
+
+
+        cartCount.classList.toggle(
+            "has-items",
+            totalItems > 0
+        );
+
+    }
+
+
+    /*
+        Also update every cart count element
+        on the current page in case we later
+        have more than one.
+    */
+
+    document
+        .querySelectorAll(".cart-count")
+        .forEach(
+            (countElement) => {
+
+                countElement.textContent =
+                    totalItems;
+
+            }
+        );
+
+};
+
+
+/* =========================================================
+   CART TOTALS
+   ========================================================= */
+
+const calculateCartTotals = () => {
+
+    const subtotal =
+        cart.reduce(
+            (total, item) => {
+
+                const dish =
+                    findDishById(
+                        item.id
+                    );
+
+
+                if (!dish) {
+                    return total;
+                }
+
+
+                return (
+                    total +
+                    (
+                        dish.price *
+                        item.quantity
+                    )
+                );
+
+            },
+            0
+        );
+
+
+    const delivery =
+        subtotal > 0
+            ? 4.5
+            : 0;
+
+
+    const tax =
+        subtotal * 0.08;
+
+
+    /*
+        For now, apply the weekend offer
+        to orders above $50.
+    */
+
+    const discount =
+        subtotal >= 50
+            ? subtotal * 0.10
+            : 0;
+
+
+    const total =
+        subtotal +
+        delivery +
+        tax -
+        discount;
+
+
+    return {
+        subtotal,
+        delivery,
+        tax,
+        discount,
+        total
+    };
+
+};
+
+
+/* =========================================================
+   FORMAT CURRENCY
+   ========================================================= */
+
+const formatCurrency = (
+    amount
+) => {
+
+    return `$${amount.toFixed(2)}`;
+
+};
+
+
+/* =========================================================
+   RENDER CART ITEM
+   ========================================================= */
+
+const createCartItem = (
+    cartItem
+) => {
+
+    const dish =
+        findDishById(
+            cartItem.id
+        );
+
+
+    if (!dish) {
+        return "";
+    }
+
+
+    const itemTotal =
+        dish.price *
+        cartItem.quantity;
+
+
+    return `
+        <article
+            class="cart-item"
+            data-cart-id="${dish.id}"
+        >
+
+            <img
+                src="${dish.image}"
+                alt="${dish.name}"
+                class="cart-item-image"
+                loading="lazy"
+            >
+
+
+            <div class="cart-item-content">
+
+                <h3 class="cart-item-name">
+                    ${dish.name}
+                </h3>
+
+
+                <div class="cart-item-meta">
+
+                    <span>
+                        ${dish.category
+                            .replace("-", " ")}
+                    </span>
+
+                    <span
+                        class="dish-meta-divider"
+                        aria-hidden="true"
+                    ></span>
+
+                    <span>
+                        ★ ${dish.rating}
+                    </span>
+
+                </div>
+
+
+                <p class="cart-item-price">
+                    $${dish.price.toFixed(2)} each
+                </p>
+
+            </div>
+
+
+            <div class="cart-item-controls">
+
+                <div
+                    class="cart-quantity"
+                    aria-label="Quantity controls"
+                >
+
+                    <button
+                        type="button"
+                        class="cart-quantity-button"
+                        data-cart-action="decrease"
+                        data-cart-id="${dish.id}"
+                        aria-label="Decrease ${dish.name} quantity"
+                    >
+                        −
+                    </button>
+
+
+                    <span class="cart-quantity-value">
+                        ${cartItem.quantity}
+                    </span>
+
+
+                    <button
+                        type="button"
+                        class="cart-quantity-button"
+                        data-cart-action="increase"
+                        data-cart-id="${dish.id}"
+                        aria-label="Increase ${dish.name} quantity"
+                    >
+                        +
+                    </button>
+
+                </div>
+
+
+                <strong class="cart-item-total">
+                    ${formatCurrency(itemTotal)}
+                </strong>
+
+
+                <button
+                    type="button"
+                    class="cart-remove-button"
+                    data-cart-action="remove"
+                    data-cart-id="${dish.id}"
+                    aria-label="Remove ${dish.name} from cart"
+                >
+                    Remove
+                </button>
+
+            </div>
+
+        </article>
+    `;
+
+};
+
+
+/* =========================================================
+   RENDER CART
+   ========================================================= */
+
+const renderCart = () => {
+
+    /*
+        Don't attempt to render cart content on pages
+        that don't contain the cart elements.
+    */
+
+    if (
+        !cartItemsContainer &&
+        !cartLayout
+    ) {
+        return;
+    }
+
+
+    if (cart.length === 0) {
+
+        if (cartLayout) {
+
+            cartLayout.hidden = true;
+
+        }
+
+
+        if (cartEmptyState) {
+
+            cartEmptyState.hidden =
+                false;
+
+        }
+
+
+    } else {
+
+        if (cartLayout) {
+
+            cartLayout.hidden =
+                false;
+
+        }
+
+
+        if (cartEmptyState) {
+
+            cartEmptyState.hidden =
+                true;
+
+        }
+
+
+        if (cartItemsContainer) {
+
+            cartItemsContainer.innerHTML =
+                cart
+                    .map(createCartItem)
+                    .join("");
+
+        }
+
+    }
+
+
+    const totals =
+        calculateCartTotals();
+
+
+    if (cartSubtotal) {
+
+        cartSubtotal.textContent =
+            formatCurrency(
+                totals.subtotal
+            );
+
+    }
+
+
+    if (cartDelivery) {
+
+        cartDelivery.textContent =
+            formatCurrency(
+                totals.delivery
+            );
+
+    }
+
+
+    if (cartTax) {
+
+        cartTax.textContent =
+            formatCurrency(
+                totals.tax
+            );
+
+    }
+
+
+    if (cartDiscount) {
+
+        cartDiscount.textContent =
+            `− ${formatCurrency(
+                totals.discount
+            )}`;
+
+    }
+
+
+    if (cartTotal) {
+
+        cartTotal.textContent =
+            formatCurrency(
+                totals.total
+            );
+
+    }
+
+};
+
+
+/* =========================================================
+   CART ITEM EVENTS
+   ========================================================= */
+
+if (cartItemsContainer) {
+
+    cartItemsContainer.addEventListener(
+        "click",
+        (event) => {
+
+            const button =
+                event.target.closest(
+                    "[data-cart-action]"
+                );
+
+
+            if (!button) {
+                return;
+            }
+
+
+            const dishId =
+                button.dataset.cartId;
+
+
+            const action =
+                button.dataset.cartAction;
+
+
+            if (action === "increase") {
+
+                changeCartQuantity(
+                    dishId,
+                    1
+                );
+
+            }
+
+
+            if (action === "decrease") {
+
+                changeCartQuantity(
+                    dishId,
+                    -1
+                );
+
+            }
+
+
+            if (action === "remove") {
+
+                removeFromCart(
+                    dishId
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   GLOBAL ADD-TO-CART EVENTS
+   ========================================================= */
+
+document.addEventListener(
+    "click",
+    (event) => {
+
+        const button =
+            event.target.closest(
+                "[data-add-to-cart]"
+            );
+
+
+        if (!button) {
+            return;
+        }
+
+
+        const dishId =
+            button.dataset.addToCart;
+
+
+        /*
+            Food-detail quantity controls use
+            a separate button and are handled below.
+        */
+
+        if (
+            button.id ===
+            "detail-add-to-cart"
+        ) {
+            return;
+        }
+
+
+        addToCart(
+            dishId,
+            1
+        );
+
+    }
+);
+
+
+/* =========================================================
+   FOOD DETAIL ADD-TO-CART
+   ========================================================= */
+
+const detailAddButton =
+    document.querySelector(
+        "#detail-add-to-cart"
+    );
+
+
+if (detailAddButton) {
+
+    detailAddButton.addEventListener(
+        "click",
+        () => {
+
+            const params =
+                new URLSearchParams(
+                    window.location.search
+                );
+
+
+            const dishId =
+                params.get("id");
+
+
+            const quantityElement =
+                document.querySelector(
+                    "#detail-quantity"
+                );
+
+
+            const quantity =
+                Number(
+                    quantityElement?.textContent ||
+                    1
+                );
+
+
+            addToCart(
+                dishId,
+                quantity
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   CART CLEAR BUTTON
+   ========================================================= */
+
+if (cartClearButton) {
+
+    cartClearButton.addEventListener(
+        "click",
+        clearCart
+    );
+
+}
+
+
+/* =========================================================
+   CHECKOUT PROTOTYPE
+   ========================================================= */
+
+if (cartCheckoutButton) {
+
+    cartCheckoutButton.addEventListener(
+        "click",
+        () => {
+
+            if (cart.length === 0) {
+
+                showToast(
+                    "Your cart is empty"
+                );
+
+                return;
+
+            }
+
+
+            showToast(
+                "Checkout will be connected later."
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   INITIAL CART RENDER
+   ========================================================= */
+
+renderCart();
+
+updateCartCount();
