@@ -382,8 +382,6 @@ const loadCart = () => {
 
 let cart = loadCart();
 
-saveCart();
-
 /* =========================================================
    SAVE CART
    ========================================================= */
@@ -2974,3 +2972,642 @@ updateCartCount();
    ========================================================= */
 
 updateCartCount();
+
+/* =========================================================
+   9. RESERVATION FORM
+   ========================================================= */
+
+const reservationForm =
+    document.querySelector("#reservation-form");
+
+
+if (reservationForm) {
+
+    const reservationDate =
+        document.querySelector("#reservation-date");
+
+    const reservationTime =
+        document.querySelector("#reservation-time");
+
+    const reservationGuests =
+        document.querySelector("#reservation-guests");
+
+    const reservationName =
+        document.querySelector("#reservation-name");
+
+    const reservationEmail =
+        document.querySelector("#reservation-email");
+
+    const reservationPhone =
+        document.querySelector("#reservation-phone");
+
+    const reservationStatus =
+        document.querySelector(
+            "#reservation-form-status"
+        );
+
+    const reservationLayout =
+        document.querySelector(
+            "#reservation-layout"
+        );
+
+    const reservationConfirmation =
+        document.querySelector(
+            "#reservation-confirmation"
+        );
+
+    const confirmationText =
+        document.querySelector(
+            "#reservation-confirmation-text"
+        );
+
+    const newReservationButton =
+        document.querySelector(
+            "#reservation-new-button"
+        );
+
+
+    /* =====================================================
+       SET MINIMUM RESERVATION DATE
+       ===================================================== */
+
+    const today =
+        new Date();
+
+
+    const year =
+        today.getFullYear();
+
+
+    const month =
+        String(
+            today.getMonth() + 1
+        ).padStart(2, "0");
+
+
+    const day =
+        String(
+            today.getDate()
+        ).padStart(2, "0");
+
+
+    const todayString =
+        `${year}-${month}-${day}`;
+
+
+    reservationDate.min =
+        todayString;
+
+
+    /* =====================================================
+       VALIDATION HELPERS
+       ===================================================== */
+
+    const setFieldError = (
+        field,
+        message
+    ) => {
+
+        const errorElement =
+            document.querySelector(
+                `#${field.id}-error`
+            );
+
+
+        field.setAttribute(
+            "aria-invalid",
+            "true"
+        );
+
+
+        if (errorElement) {
+
+            errorElement.textContent =
+                message;
+
+        }
+
+    };
+
+
+    const clearFieldError = (
+        field
+    ) => {
+
+        const errorElement =
+            document.querySelector(
+                `#${field.id}-error`
+            );
+
+
+        field.removeAttribute(
+            "aria-invalid"
+        );
+
+
+        if (errorElement) {
+
+            errorElement.textContent =
+                "";
+
+        }
+
+    };
+
+
+    const validateEmail = (
+        email
+    ) => {
+
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+            .test(email);
+
+    };
+
+
+    const validatePhone = (
+        phone
+    ) => {
+
+        return /^[+\d\s()-]{7,20}$/
+            .test(phone);
+
+    };
+
+/* =====================================================
+       DISPLAY HELPERS
+       ===================================================== */
+
+    const selectedDateForDisplay = (
+        date
+    ) => {
+
+        const dateObject =
+            new Date(
+                `${date}T00:00:00`
+            );
+
+
+        return dateObject.toLocaleDateString(
+            "en-US",
+            {
+                weekday: "long",
+                month: "long",
+                day: "numeric",
+                year: "numeric"
+            }
+        );
+
+    };
+
+
+    const formatReservationTime = (
+        time
+    ) => {
+
+        const [
+            hours,
+            minutes
+        ] = time.split(":");
+
+
+        const dateObject =
+            new Date();
+
+
+        dateObject.setHours(
+            Number(hours),
+            Number(minutes),
+            0
+        );
+
+
+        return dateObject.toLocaleTimeString(
+            "en-US",
+            {
+                hour: "numeric",
+                minute: "2-digit"
+            }
+        );
+
+    };
+
+    /* =====================================================
+       SUBMIT
+       ===================================================== */
+
+    reservationForm.addEventListener(
+        "submit",
+        (event) => {
+
+            event.preventDefault();
+
+
+            const date =
+                reservationDate.value;
+
+
+            const time =
+                reservationTime.value;
+
+
+            const guests =
+                reservationGuests.value;
+
+
+            const name =
+                reservationName.value.trim();
+
+
+            const email =
+                reservationEmail.value.trim();
+
+
+            const phone =
+                reservationPhone.value.trim();
+
+
+            const table =
+                document.querySelector(
+                    "#reservation-table"
+                ).value;
+
+
+            const requests =
+                document.querySelector(
+                    "#reservation-requests"
+                ).value.trim();
+
+
+            let isValid = true;
+
+
+            /*
+                Clear existing errors.
+            */
+
+            [
+                reservationDate,
+                reservationTime,
+                reservationGuests,
+                reservationName,
+                reservationEmail,
+                reservationPhone
+            ].forEach(
+                clearFieldError
+            );
+
+
+            if (!date) {
+
+                setFieldError(
+                    reservationDate,
+                    "Please choose a date."
+                );
+
+                isValid = false;
+
+            }
+
+
+            if (date) {
+
+                const selectedDate =
+                    new Date(
+                        `${date}T00:00:00`
+                    );
+
+
+                const currentDate =
+                    new Date(
+                        `${todayString}T00:00:00`
+                    );
+
+
+                if (
+                    selectedDate <
+                    currentDate
+                ) {
+
+                    setFieldError(
+                        reservationDate,
+                        "Please choose today or a future date."
+                    );
+
+                    isValid = false;
+
+                }
+
+            }
+
+
+            if (!time) {
+
+                setFieldError(
+                    reservationTime,
+                    "Please select a time."
+                );
+
+                isValid = false;
+
+            }
+
+
+            if (!guests) {
+
+                setFieldError(
+                    reservationGuests,
+                    "Please select the number of guests."
+                );
+
+                isValid = false;
+
+            }
+
+
+            if (name.length < 2) {
+
+                setFieldError(
+                    reservationName,
+                    "Please enter your full name."
+                );
+
+                isValid = false;
+
+            }
+
+
+            if (!validateEmail(email)) {
+
+                setFieldError(
+                    reservationEmail,
+                    "Please enter a valid email address."
+                );
+
+                isValid = false;
+
+            }
+
+
+            if (!validatePhone(phone)) {
+
+                setFieldError(
+                    reservationPhone,
+                    "Please enter a valid phone number."
+                );
+
+                isValid = false;
+
+            }
+
+
+            if (!isValid) {
+
+                reservationStatus.textContent =
+                    "Please correct the highlighted fields.";
+
+                return;
+            }
+
+            reservationStatus.textContent = "";
+
+            /*
+                Frontend prototype confirmation.
+
+                We are intentionally not sending this data
+                to a backend yet.
+            */
+
+            const formattedDate =
+                selectedDateForDisplay(date);
+
+
+            reservationConfirmation
+                .hidden = false;
+
+
+            reservationLayout
+                .hidden = true;
+
+
+            confirmationText.textContent =
+                `Thanks, ${name}. Your request for ${guests} ${
+                    Number(guests) === 1
+                        ? "guest"
+                        : "guests"
+                } on ${formattedDate} at ${formatReservationTime(time)} has been recorded as a frontend prototype request.`;
+
+
+            /*
+                Keep these variables available for the future
+                backend implementation.
+            */
+
+            console.log({
+                date,
+                time,
+                guests,
+                name,
+                email,
+                phone,
+                table,
+                requests
+            });
+
+        }
+    );
+
+
+    /* =====================================================
+       NEW RESERVATION
+       ===================================================== */
+
+    if (newReservationButton) {
+
+        newReservationButton.addEventListener(
+            "click",
+            () => {
+
+                reservationForm.reset();
+
+
+                reservationConfirmation
+                    .hidden = true;
+
+
+                reservationLayout
+                    .hidden = false;
+
+
+                reservationStatus.textContent =
+                    "";
+
+
+                [
+                    reservationDate,
+                    reservationTime,
+                    reservationGuests,
+                    reservationName,
+                    reservationEmail,
+                    reservationPhone
+                ].forEach(
+                    clearFieldError
+                );
+
+
+                reservationDate.min =
+                    todayString;
+
+            }
+        );
+
+    }
+
+}
+/* =========================================================
+   10. ABOUT PAGE STATISTICS COUNTERS
+   ========================================================= */
+
+const counterElements =
+    document.querySelectorAll(
+        "[data-counter]"
+    );
+
+
+if (counterElements.length > 0) {
+
+    const animateCounter = (
+        element
+    ) => {
+
+        const target =
+            Number(
+                element.dataset.counter
+            );
+
+
+        const suffix =
+            element.dataset.suffix || "";
+
+
+        const duration = 1400;
+
+        const startTime =
+            performance.now();
+
+
+        const updateCounter = (
+            currentTime
+        ) => {
+
+            const elapsed =
+                currentTime - startTime;
+
+
+            const progress =
+                Math.min(
+                    elapsed / duration,
+                    1
+                );
+
+
+            /*
+                Ease-out animation.
+
+                The counter starts quickly and
+                slows down naturally near the end.
+            */
+
+            const easedProgress =
+                1 -
+                Math.pow(
+                    1 - progress,
+                    3
+                );
+
+
+            const currentValue =
+                target *
+                easedProgress;
+
+
+            /*
+                The 4.9 rating needs one decimal
+                place. Whole-number statistics don't.
+            */
+
+            element.textContent =
+                target % 1 !== 0
+                    ? currentValue.toFixed(1)
+                    : Math.floor(currentValue);
+
+
+            if (progress < 1) {
+
+                requestAnimationFrame(
+                    updateCounter
+                );
+
+            } else {
+
+                element.textContent =
+                    target % 1 !== 0
+                        ? target.toFixed(1) + suffix
+                        : target + suffix;
+
+            }
+
+        };
+
+
+        requestAnimationFrame(
+            updateCounter
+        );
+
+    };
+
+
+    const counterObserver =
+        new IntersectionObserver(
+            (entries, observer) => {
+
+                entries.forEach(
+                    (entry) => {
+
+                        if (
+                            !entry.isIntersecting
+                        ) {
+                            return;
+                        }
+
+
+                        animateCounter(
+                            entry.target
+                        );
+
+
+                        observer.unobserve(
+                            entry.target
+                        );
+
+                    }
+                );
+
+            },
+            {
+                threshold: 0.35
+            }
+        );
+
+
+    counterElements.forEach(
+        (counter) => {
+
+            counterObserver.observe(
+                counter
+            );
+
+        }
+    );
+
+}
