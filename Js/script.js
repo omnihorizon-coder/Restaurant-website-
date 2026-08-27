@@ -3611,3 +3611,296 @@ if (counterElements.length > 0) {
     );
 
 }
+/* =========================================================
+   11. CONTACT FORM
+   ========================================================= */
+
+const contactForm =
+    document.querySelector("#contact-form");
+
+
+if (contactForm) {
+
+    const contactName =
+        document.querySelector("#contact-name");
+
+    const contactEmail =
+        document.querySelector("#contact-email");
+
+    const contactSubject =
+        document.querySelector("#contact-subject");
+
+    const contactMessage =
+        document.querySelector("#contact-message");
+
+    const contactStatus =
+        document.querySelector("#contact-form-status");
+
+
+    const setContactError = (
+        field,
+        message
+    ) => {
+
+        const errorElement =
+            document.querySelector(
+                `#${field.id}-error`
+            );
+
+
+        field.setAttribute(
+            "aria-invalid",
+            "true"
+        );
+
+
+        if (errorElement) {
+
+            errorElement.textContent =
+                message;
+
+        }
+
+    };
+
+
+    const clearContactError = (
+        field
+    ) => {
+
+        const errorElement =
+            document.querySelector(
+                `#${field.id}-error`
+            );
+
+
+        field.removeAttribute(
+            "aria-invalid"
+        );
+
+
+        if (errorElement) {
+
+            errorElement.textContent =
+                "";
+
+        }
+
+    };
+
+
+    const isValidEmail = (
+        email
+    ) => {
+
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+            .test(email);
+
+    };
+
+
+    contactForm.addEventListener(
+        "submit",
+        (event) => {
+
+            event.preventDefault();
+
+
+            const name =
+                contactName.value.trim();
+
+
+            const email =
+                contactEmail.value.trim();
+
+
+            const subject =
+                contactSubject.value;
+
+
+            const message =
+                contactMessage.value.trim();
+
+
+            let isValid = true;
+
+
+            [
+                contactName,
+                contactEmail,
+                contactSubject,
+                contactMessage
+            ].forEach(
+                clearContactError
+            );
+
+
+            contactStatus.textContent =
+                "";
+
+
+            if (name.length < 2) {
+
+                setContactError(
+                    contactName,
+                    "Please enter your full name."
+                );
+
+                isValid = false;
+
+            }
+
+
+            if (!isValidEmail(email)) {
+
+                setContactError(
+                    contactEmail,
+                    "Please enter a valid email address."
+                );
+
+                isValid = false;
+
+            }
+
+
+            if (!subject) {
+
+                setContactError(
+                    contactSubject,
+                    "Please choose a subject."
+                );
+
+                isValid = false;
+
+            }
+
+
+            if (message.length < 10) {
+
+                setContactError(
+                    contactMessage,
+                    "Please enter at least 10 characters."
+                );
+
+                isValid = false;
+
+            }
+
+
+            if (!isValid) {
+
+                contactStatus.textContent =
+                    "Please correct the highlighted fields.";
+
+                return;
+            }
+
+
+            contactStatus.textContent =
+                "Thanks for reaching out. Your message has been recorded as a frontend prototype request.";
+
+
+            contactStatus.classList.add(
+                "success"
+            );
+
+
+            contactForm.reset();
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   12. FAQ ACCORDION
+   ========================================================= */
+
+const faqQuestions =
+    document.querySelectorAll(
+        ".faq-question"
+    );
+
+
+faqQuestions.forEach(
+    (question) => {
+
+        question.addEventListener(
+            "click",
+            () => {
+
+                const isExpanded =
+                    question.getAttribute(
+                        "aria-expanded"
+                    ) === "true";
+
+
+                /*
+                    Close all other FAQ items.
+                */
+
+                faqQuestions.forEach(
+                    (otherQuestion) => {
+
+                        if (
+                            otherQuestion !== question
+                        ) {
+
+                            otherQuestion.setAttribute(
+                                "aria-expanded",
+                                "false"
+                            );
+
+
+                            const otherAnswer =
+                                document.getElementById(
+                                    otherQuestion.getAttribute(
+                                        "aria-controls"
+                                    )
+                                );
+
+
+                            if (otherAnswer) {
+
+                                otherAnswer.hidden =
+                                    true;
+
+                            }
+
+                        }
+
+                    }
+                );
+
+
+                /*
+                    Toggle the selected question.
+                */
+
+                question.setAttribute(
+                    "aria-expanded",
+                    String(!isExpanded)
+                );
+
+
+                const answer =
+                    document.getElementById(
+                        question.getAttribute(
+                            "aria-controls"
+                        )
+                    );
+
+
+                if (answer) {
+
+                    answer.hidden =
+                        isExpanded;
+
+                }
+
+            }
+        );
+
+    }
+);
