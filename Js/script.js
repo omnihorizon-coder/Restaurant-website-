@@ -301,6 +301,114 @@ const dishes = [
 ];
 
 /* =========================================================
+   CART STATE
+   ========================================================= */
+
+const CART_STORAGE_KEY =
+    "emberAndSpoonCart";
+
+
+/*
+    Load the cart safely from LocalStorage.
+
+    If the saved data is missing, invalid, or contains
+    incorrect values, we return an empty cart instead
+    of allowing the application to break.
+*/
+
+const loadCart = () => {
+
+    try {
+
+        const storedCart =
+            localStorage.getItem(
+                CART_STORAGE_KEY
+            );
+
+
+        if (!storedCart) {
+            return [];
+        }
+
+
+        const parsedCart =
+            JSON.parse(storedCart);
+
+
+        if (!Array.isArray(parsedCart)) {
+            return [];
+        }
+
+
+        return parsedCart.filter(
+            (item) => {
+
+                const dishExists =
+                    dishes.some(
+                        (dish) =>
+                            dish.id === item.id
+                    );
+
+
+                const validQuantity =
+                    Number.isInteger(
+                        item.quantity
+                    ) &&
+                    item.quantity > 0;
+
+
+                return (
+                    dishExists &&
+                    validQuantity
+                );
+
+            }
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Unable to load cart:",
+            error
+        );
+
+
+        return [];
+
+    }
+
+};
+
+
+let cart = loadCart();
+
+saveCart();
+
+/* =========================================================
+   SAVE CART
+   ========================================================= */
+
+const saveCart = () => {
+
+    try {
+
+        localStorage.setItem(
+            CART_STORAGE_KEY,
+            JSON.stringify(cart)
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Unable to save cart:",
+            error
+        );
+
+    }
+
+};
+
+/* =========================================================
    MENU STATE
    ========================================================= */
 
@@ -993,6 +1101,51 @@ if (navbarToggle && mainNavigation) {
         }
     );
 }
+
+/* =========================================================
+   CART COUNT
+   ========================================================= */
+
+const updateCartCount = () => {
+
+    const cartCountElement =
+        document.querySelector("#cart-count");
+
+
+    if (!cartCountElement) {
+        return;
+    }
+
+
+    const totalItems =
+        cart.reduce(
+            (total, item) =>
+                total + item.quantity,
+            0
+        );
+
+
+    cartCountElement.textContent =
+        totalItems;
+
+
+    cartCountElement.setAttribute(
+        "aria-label",
+        `${totalItems} ${
+            totalItems === 1
+                ? "item"
+                : "items"
+        } in cart`
+    );
+
+
+    cartCountElement.classList.toggle(
+        "has-items",
+        totalItems > 0
+    );
+
+};
+
 /* =========================================================
    3. FOOTER CURRENT YEAR
    ========================================================= */
@@ -1991,12 +2144,58 @@ if (foodDetailContainer) {
     }
 
 }
+
 /* =========================================================
-   9. CART SYSTEM
+   ADD TO CART
    ========================================================= */
 
-let cart = [];
+const addToCart = (
+    dishId,
+    quantity = 1
+) => {
 
+    const selectedDish =
+        dishes.find(
+            (dish) =>
+                dish.id === dishId
+        );
+
+
+    if (!selectedDish) {
+        return;
+    }
+
+
+    const existingItem =
+        cart.find(
+            (item) =>
+                item.id === dishId
+        );
+
+
+    if (existingItem) {
+
+        existingItem.quantity += quantity;
+
+    } else {
+
+        cart.push({
+            id: dishId,
+            quantity: quantity
+        });
+
+    }
+
+
+    saveCart();
+
+    updateCartCount();
+
+    showToast(
+        `${selectedDish.name} added to cart`
+    );
+
+};
 
 /* =========================================================
    CART DOM ELEMENTS
@@ -2094,57 +2293,6 @@ const findDishById = (dishId) => {
 
 
 /* =========================================================
-   ADD TO CART
-   ========================================================= */
-
-const addToCart = (
-    dishId,
-    quantity = 1
-) => {
-
-    const dish =
-        findDishById(dishId);
-
-
-    if (!dish) {
-        return;
-    }
-
-
-    const existingItem =
-        cart.find(
-            (item) =>
-                item.id === dishId
-        );
-
-
-    if (existingItem) {
-
-        existingItem.quantity +=
-            quantity;
-
-    } else {
-
-        cart.push({
-            id: dish.id,
-            quantity
-        });
-
-    }
-
-
-    renderCart();
-
-    updateCartCount();
-
-    showToast(
-        `${dish.name} added to cart`
-    );
-
-};
-
-
-/* =========================================================
    CHANGE CART QUANTITY
    ========================================================= */
 
@@ -2176,11 +2324,11 @@ const changeCartQuantity = (
 
     }
 
+    saveCart();
 
     renderCart();
 
     updateCartCount();
-
 };
 
 
@@ -2188,12 +2336,22 @@ const changeCartQuantity = (
    REMOVE ITEM
    ========================================================= */
 
-const removeFromCart = (
-    dishId
-) => {
+const removeFromCart = (dishId) => {
 
     const dish =
         findDishById(dishId);
+
+
+    const itemExists =
+        cart.some(
+            (item) =>
+                item.id === dishId
+        );
+
+
+    if (!itemExists) {
+        return;
+    }
 
 
     cart =
@@ -2202,6 +2360,8 @@ const removeFromCart = (
                 item.id !== dishId
         );
 
+
+    saveCart();
 
     renderCart();
 
@@ -2226,6 +2386,11 @@ const removeFromCart = (
 const clearCart = () => {
 
     if (cart.length === 0) {
+
+        showToast(
+            "Your cart is already empty"
+        );
+
         return;
     }
 
@@ -2233,74 +2398,20 @@ const clearCart = () => {
     cart = [];
 
 
+    saveCart();
+
+
     renderCart();
 
+
     updateCartCount();
+
 
     showToast(
         "Cart cleared"
     );
 
 };
-
-
-/* =========================================================
-   CART COUNT
-   ========================================================= */
-
-const updateCartCount = () => {
-
-    const totalItems =
-        cart.reduce(
-            (total, item) =>
-                total + item.quantity,
-            0
-        );
-
-
-    /*
-        Update navbar badge if it exists.
-    */
-
-    if (cartCount) {
-
-        cartCount.textContent =
-            totalItems;
-
-
-        cartCount.setAttribute(
-            "aria-label",
-            `${totalItems} items in cart`
-        );
-
-
-        cartCount.classList.toggle(
-            "has-items",
-            totalItems > 0
-        );
-
-    }
-
-
-    /*
-        Also update every cart count element
-        on the current page in case we later
-        have more than one.
-    */
-
-    document
-        .querySelectorAll(".cart-count")
-        .forEach(
-            (countElement) => {
-
-                countElement.textContent =
-                    totalItems;
-
-            }
-        );
-
-};
-
 
 /* =========================================================
    CART TOTALS
@@ -2539,35 +2650,38 @@ const renderCart = () => {
 
     if (cart.length === 0) {
 
-        if (cartLayout) {
+    if (cartItemsContainer) {
 
-            cartLayout.hidden = true;
+        cartItemsContainer.innerHTML = "";
 
-        }
+    }
 
 
-        if (cartEmptyState) {
+    if (cartLayout) {
 
-            cartEmptyState.hidden =
-                false;
+        cartLayout.hidden = true;
 
-        }
+    }
 
+
+    if (cartEmptyState) {
+
+        cartEmptyState.hidden = false;
+
+    }
 
     } else {
 
         if (cartLayout) {
 
-            cartLayout.hidden =
-                false;
+            cartLayout.hidden = false;
 
         }
 
 
         if (cartEmptyState) {
-
-            cartEmptyState.hidden =
-                true;
+            
+            cartEmptyState.hidden = true;
 
         }
 
@@ -2582,7 +2696,6 @@ const renderCart = () => {
         }
 
     }
-
 
     const totals =
         calculateCartTotals();
@@ -2806,7 +2919,11 @@ if (cartClearButton) {
 
     cartClearButton.addEventListener(
         "click",
-        clearCart
+        () => {
+
+            clearCart();
+
+        }
     );
 
 }
@@ -2848,5 +2965,12 @@ if (cartCheckoutButton) {
    ========================================================= */
 
 renderCart();
+
+updateCartCount();
+
+
+/* =========================================================
+   INITIALIZE SHARED CART
+   ========================================================= */
 
 updateCartCount();
