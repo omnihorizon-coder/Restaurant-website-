@@ -3901,6 +3901,5 @@ faqQuestions.forEach(
 
             }
         );
-
     }
 );
